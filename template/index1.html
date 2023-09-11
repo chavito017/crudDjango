@@ -1,0 +1,79 @@
+{% extends "./basePlantilla.html" %}
+
+{% block title %} API {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Gestión de Usuarios</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarUsuario/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="textUsername" name="textUsername" class="form-control" placeholder="Usuario" minlength="6"
+                        maxlength="6" required> 
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="textEmail" name="textEmail" class="form-control" placeholder="Correo Electrónico" minlength="6"
+                        maxlength="50" required> 
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="textPassword" name="textPassword" class="form-control" placeholder="Contraseña" minlength="6"
+                        maxlength="6" required> 
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Usuarios</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Usuario</th>
+                        <th>Correo Electrónico</th>
+                        <th>Contraseña</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in usuarios %}
+                    <tr> 
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ u.username }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>{{ u.password }}</td>
+                        <td><a href="editarUsuario/{{u.id}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarUsuario/{{u.id}}" class="btn btn-danger btnEliminacion" >Eliminar</a></td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <!-- Aquí puedes agregar el código para mostrar mensajes -->
+        <!-- {% if messages %}
+        <div class="col-12">
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %} -->
+</div>
+{% endblock %}

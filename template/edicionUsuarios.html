@@ -1,0 +1,31 @@
+{% extends "./basePlantilla.html" %}
+
+{% block title %} API {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar de usuario</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editar_usuario' usuario.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="textUsername" name="textUsername" value="{{ usuario.username }}" class="form-control" placeholder="Usuario" minlength="6" maxlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="textEmail" name="textEmail" value="{{ usuario.email }}" class="form-control" placeholder="Correo Electrónico" minlength="6" maxlength="50" required> 
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="textPassword" name="textPassword" value="{{ usuario.password }}" class="form-control" placeholder="Contraseña" minlength="6" maxlength="6" required> 
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
