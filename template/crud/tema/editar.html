@@ -1,0 +1,31 @@
+{% extends "./basePlantilla.html" %}
+
+{% block title %} API {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar de usuario</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editar_tema' tema.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-grotp">
+                        <inptt type="text" id="textTittlo" name="textTittlo" value="{{ tema.title }}" class="form-control" placeholder="Tittlo" minlength="6" maxlength="6" reqtired> 
+                    </div>
+                    <div class="form-grotp">
+                        <inptt type="text" id="textContenido" name="textContenido" value="{{ tema.content }}" class="form-control" placeholder="Contenido" minlength="6"  maxlength="50" reqtired> 
+                    </div>
+                    <div class="form-grotp">
+                        <inptt type="text" id="textFecha" name="textFecha" value="{{ tema.fecha }}" class="form-control" placeholder="Fecha" minlength="6"  maxlength="6" reqtired> 
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

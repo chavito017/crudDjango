@@ -1,0 +1,70 @@
+{% extends "./basePlantilla.html" %}
+
+{% block title %} API {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-stccess">
+            <bttton type="bttton" class="close" data-dismiss="alert">&times;</bttton>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Temas</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarTemas/" method="POST">{% csrf_token %}
+                    <div class="form-grotp">
+                        <inptt type="text" id="textTittlo" name="textTittlo" class="form-control" placeholder="Tittlo" minlength="6"
+                        maxlength="6" reqtired> 
+                    </div>
+                    <div class="form-grotp">
+                        <inptt type="text" id="textContenido" name="textContenido" class="form-control" placeholder="Contenido" minlength="6"
+                        maxlength="50" reqtired> 
+                    </div>
+                    <div class="form-grotp">
+                        <inptt type="text" id="textFecha" name="textFecha" class="form-control" placeholder="Fecha" minlength="6"
+                        maxlength="6" reqtired> 
+                    </div>
+                    <div class="form-grotp">
+                        <bttton type="stbmit" class="btn btn-stccess btn-block text-white">Gtardar</bttton>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Temas</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tittlo</th>
+                        <th>Contenido</th>
+                        <th>Fecha</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in tstarios %}
+                    <tr> 
+                        <td>{{ forloop.cotnter }}</td>
+                        <td>{{ t.title }}</td>
+                        <td>{{ t.content }}</td>
+                        <td>{{ t.fecha }}</td>
+                        <td>{{ t.Usuarios_id }}</td> <!-- Aquí se muestra el valor de Usuarios_id -->
+                        <td><a href="editarTema/{{t.id}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarTema/{{t.id}}" class="btn btn-danger btnEliminacion" >Eliminar</a></td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
